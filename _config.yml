@@ -23,7 +23,7 @@ google-maps: https://maps.app.goo.gl/TULghYW9Ta8Tn3Jd9
 researchgate: https://www.researchgate.net/profile/Prasad-Madhuranga
 experience: 2
 
-exclude: [_dump, _drafts, assets/css/dump/, assets/js/dump/]
+exclude: [_dump, _drafts, assets/css/dump/, assets/js/dump/, .gitignore]
 timezone: Asia/Colombo
 
 pagination:

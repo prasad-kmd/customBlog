@@ -192,3 +192,7 @@ assets/css/dump/navbar2.css
 assets/css/dump/navbar3.css
 assets/js/dump/1.js
 assets/js/dump/navbar.js
+_site
+_dump
+assets/css/dump
+assets/js/dump
