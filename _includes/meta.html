@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% assign page_title = page.title | default: site.title %}
+{% assign page_description = page.description | default: page.excerpt | default: site.description %}
+{% assign page_author = page.author | default: site.author %}
+{% assign page_image = page.image | default: site.image %} {% assign page_url = page.url | absolute_url %}
+{% assign site_name = site.title %}
+
+<title>{{ page_title }}</title>
+
+<meta name="description" content="{{ page_description | strip_html | strip_newlines | truncate: 160 }}">
+
+{% if page_author %}
+<meta name="author" content="{{ page_author }}">
+{% endif %}
+
+{% assign page_keywords = page.keywords | default: site.keywords %}
+{% if page_keywords %}
+<meta name="keywords" content="{{ page_keywords | join: ', ' }}">
+{% endif %}
+
+{% if page.noindex %}
+<meta name="robots" content="noindex, nofollow">
+{% else %}
+<meta name="robots" content="index, follow">
+{% endif %}
+
+<link rel="canonical" href="{{ page.canonical_url | default: page_url }}">
+
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_description | strip_html | strip_newlines | truncate: 160 }}">
+<meta property="og:url" content="{{ page_url }}">
+<meta property="og:site_name" content="{{ site_name }}">
+{% if page_image %}
+<meta property="og:image" content="{{ page_image | absolute_url }}">
+{% endif %}
+{% if page.date %}
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% if page.author %}
+<meta property="article:author" content="{{ page.author }}">
+{% endif %}
+{% else %}
+<meta property="og:type" content="website">
+{% endif %}
+{% if site.facebook_app_id %}
+<meta property="fb:app_id" content="{{ site.facebook_app_id }}">
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title }}">
+<meta name="twitter:description" content="{{ page_description | strip_html | strip_newlines | truncate: 160 }}">
+{% if page_image %}
+<meta name="twitter:image" content="{{ page_image | absolute_url }}">
+{% endif %}
+{% if site.twitter_username %}
+<meta name="twitter:site" content="@{{ site.twitter_username }}">
+{% assign page_twitter_creator = page.twitter_creator | default: site.twitter_username %}
+<meta name="twitter:creator" content="@{{ page_twitter_creator }}">
+{% endif %}
+
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/favicon/apple-touch-icon.png' | absolute_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon/favicon-32x32.png' | absolute_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon/favicon-16x16.png' | absolute_url }}">
+<link rel="manifest" href="{{ '/assets/img/favicon/site.webmanifest' | absolute_url }}">
+<link rel="mask-icon" href="{{ '/assets/img/favicon/safari-pinned-tab.svg' | absolute_url }}" color="#5bbad5">
+<link rel="shortcut icon" href="{{ '/assets/img/favicon/favicon.ico' | absolute_url }}">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="{{ '/assets/img/favicon/browserconfig.xml' | absolute_url }}">
+<meta name="theme-color" content="#ffffff">

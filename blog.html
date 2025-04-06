@@ -1,0 +1,132 @@
+---
+layout: blog
+title: "Blog Page"
+permalink: /posts/
+description: "Our latest articles and insights." # Example description
+paginate: 6 # Number of posts per page (requires jekyll-paginate or jekyll-paginate-v2 plugin)
+paginate_path: "/blog/page:num/" # URL structure for pagination
+bactive: class="active"
+---
+
+<!-- Blog Hero Section -->
+<section class="blog-hero">
+    <div class="container">
+        <h1 class="blog-hero-title">Our Blog</h1>
+        <p class="blog-hero-subtitle">Insights, tutorials, and updates from our team</p>
+
+        <!-- Search and Filter -->
+        <div class="blog-controls">
+            <div class="blog-search">
+                <input type="text" placeholder="Search articles..." aria-label="Search articles">
+                <button type="button" aria-label="Search">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="blog-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                {% assign categories = '' | split: '' %}
+                {% for post in site.posts %}
+                    {% for cat in post.categories %}
+                        {% unless categories contains cat %}
+                            {% assign categories = categories | push: cat %}
+                        {% endunless %}
+                    {% endfor %}
+                {% endfor %}
+                {% for cat in categories %}
+                    <button class="filter-btn" data-filter="{{ cat | downcase }}">{{ cat }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Post (Latest Post) -->
+<section class="featured-post">
+    <div class="container">
+        {% assign latest_post = site.posts.first %}
+        <div class="featured-post-card">
+            <div class="featured-post-image">
+                <div class="featured-post-category">{{ latest_post.categories.first | capitalize }}</div>
+                {% if latest_post.thumbnail %}
+                <img src="{{ latest_post.thumbnail }}" alt="{{ latest_post.title }}" class="featured-img">
+                {% elsif latest_post.content contains '<img' %} {% assign img_tag=latest_post.content | split: '<img' |
+                    last | split: 'rc="' | last | split: '"' | first %} <img src="{{ img_tag }}"
+                    alt="{{ latest_post.title }}" class="featured-img">
+                    {% else %}
+                    <!-- Default image or no image handling -->
+                    <img src="{{ site.default_image }}" alt="{{ latest_post.title }}" class="featured-img">
+                    {% endif %}
+            </div>
+            <div class="featured-post-content">
+                <div class="featured-post-meta">
+                    <span class="featured-post-date">{{ latest_post.date | date: "%B %d, %Y" }}</span>
+                    <span class="featured-post-author">By {{ latest_post.author }}</span>
+                </div>
+                <h2 class="featured-post-title">{{ latest_post.title }}</h2>
+                <p class="featured-post-excerpt">
+                    {{ latest_post.content | strip_html | truncatewords: 55 }}
+                </p>
+                <a href="{{ latest_post.url }}" class="featured-post-link">Read Full Article</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Posts Grid -->
+<section class="blog-posts">
+    <div class="container">
+        <h2 class="section-title">Latest Articles</h2>
+        <p class="section-subtitle">Discover our thoughts, ideas and insights</p>
+
+        <div class="blog-grid">
+            {% for post in site.posts offset:0 %} <!-- offset:1 to skip the latest post already featured -->
+            <article class="blog-post-card" data-category="{{ post.categories.first | downcase }}">
+                <div class="blog-post-image">
+                    <div class="blog-post-category">{{ post.categories.first | capitalize }}</div>
+                    {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="blog-post-img">
+                    {% elsif post.content contains '<img' %} {% assign img_tag=post.content | split: '<img' | last |
+                        split: 'rc="' | last | split: '"' | first %} <img src="{{ img_tag }}" alt="{{ post.title }}"
+                        class="blog-post-img">
+                        {% else %}
+                        <!-- Default image or no image handling -->
+                        <img src="{{ site.default_image }}" alt="{{ post.title }}" class="blog-post-img">
+                        {% endif %}
+                </div>
+                <div class="blog-post-content">
+                    <div class="blog-post-meta">
+                        <span class="blog-post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                        <span class="blog-post-read-time">{{ post.read_time }} min read</span>
+                    </div>
+                    <h3 class="blog-post-title">{{ post.title }}</h3>
+                    <p class="blog-post-excerpt">
+                        {{ post.content | strip_html | truncatewords: 30 }}
+                    </p>
+                    <a href="{{ post.url }}" class="blog-post-link">Read More</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination (Jekyll Paginate, if activated in config.yml) -->
+        {% if paginator %}
+        <div class="blog-pagination">
+            {% for page in (1..paginator.total_pages) %}
+            <button class="pagination-btn {% if page == paginator.page %}active{% endif %}">
+                {{ page }}
+            </button>
+            {% endfor %}
+            <button class="pagination-btn pagination-next">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</section>

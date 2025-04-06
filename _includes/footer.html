@@ -1,0 +1,86 @@
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <h2 class="footer-logo logo-text">{{site.title}}</h2>
+                    <p class="footer-description">
+                        {{site.description}}
+                    </p>
+                    <style>
+                        .social-icon{
+                            text-decoration: none;
+                        }
+                    </style>
+                    <div class="footer-social">
+                        <h3>FOLLOW ME:</h3>
+                        <div class="social-icons">
+                            <a href="{{site.linkedin}}" target="_blank" class="social-icon" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in fa-fade" aria-hidden="true"></i>
+                            </a>
+                    
+                            <a href="{{site.github}}" target="_blank" class="social-icon" aria-label="GitHub">
+                                <i class="fa-brands fa-github fa-fade" aria-hidden="true"></i>
+                            </a>
+                    
+                            <a href="{{site.researchgate}}" target="_blank" class="social-icon" aria-label="ResearchGate">
+                                <i class="fa-brands fa-researchgate fa-fade" aria-hidden="true"></i>
+                            </a>
+                    
+                            <a href="{{site.medium}}" target="_blank" class="social-icon" aria-label="Medium">
+                                <i class="fa-brands fa-medium fa-fade" aria-hidden="true"></i>
+                            </a>
+                    
+                            <a href="{{site.telegram}}" target="_blank" class="social-icon" aria-label="Telegram">
+                                <i class="fa-brands fa-telegram fa-fade" aria-hidden="true"></i>
+                            </a>
+                    
+                            <a href="{{site.google-maps}}" target="_blank" class="social-icon" aria-label="Google Maps">
+                                <i class="fa-brands fa-google fa-fade" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Scientific Calculator</a></li>
+                        <li><a href="/search/">Search</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Section -->
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Me</a></li>
+                        <li><a href="#">Get in Touch</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Section -->
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="footer-copyright">
+        <div class="container">
+            <p>&copy; {{ site.title }} {{ 'now' | date: "%Y" }}. All Rights Reserved.</p>
+        </div>
+    </div>
+    {% include footerCL.html %}
+</footer>

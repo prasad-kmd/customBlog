@@ -1,0 +1,13 @@
+Prasad:
+  name: Prasad Madhuranga
+  url: https://prasadmadhuranga.t.me
+  title: Author
+  bio: Prasad is a software engineer.
+  twitter: prasadmadhuranga
+  usericon: <i class="fa-solid fa-user-headset fa-fade"></i>
+JaneDoe:
+  name: Jane Doe
+  url: https://janedoe.example.com
+  bio: Jane is a writer and editor.
+  twitter: janedoe
+  usericon: <i class="fa-solid fa-user-music"></i>

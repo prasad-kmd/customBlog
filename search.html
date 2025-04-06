@@ -1,0 +1,235 @@
+---
+layout: default
+title: "Search"
+permalink: /search/
+---
+
+<style>
+  .flex {
+    display: flex;
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .min-h-screen {
+    min-height: 65vh;
+  }
+
+  .bg-white {
+    background-color: #fff;
+    backface-visibility: hidden;
+  }
+
+  .p-8 {
+    padding: 2rem;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .max-w-md {
+    max-width: 36rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .text-gray-700 {
+    color: #4a5568;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .appearance-none {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .border {
+    border-width: 1px;
+  }
+
+  .rounded {
+    border-radius: 0.25rem;
+  }
+
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .leading-tight {
+    line-height: 1.25;
+  }
+
+  .focus\:outline-none:focus {
+    outline: none;
+  }
+
+  .focus\:shadow-outline:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .text-gray-800 {
+    color: #2d3748;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-blue-500 {
+    background-color: #4299e1;
+  }
+
+  .hover\:bg-blue-700:hover {
+    background-color: #2b6cb0;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+</style>
+<main>
+  <section>
+    <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-semibold mb-4 text-gray-800 text-center">Search Application</h1>
+
+        <div class="mb-4">
+          <label for="searchEngine" class="block text-gray-700 text-sm font-bold mb-2">
+            Search Engine:
+          </label>
+          <select id="searchEngine"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="brave">Brave</option>
+            <option value="yandex">Yandex</option>
+            <option value="ask">Ask.com</option>
+            <option value="qwant">Qwant</option>
+            <option value="yahoo">Yahoo</option>
+          </select>
+        </div>
+
+        <div class="mb-6">
+          <label for="searchTerm" class="block text-gray-700 text-sm font-bold mb-2">
+            Search Term:
+          </label>
+          <input type="text" id="searchTerm"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your search term" />
+        </div>
+
+        <div class="flex items-center justify-center">
+          <button id="searchButton"
+            class="cta-button"
+            type="button">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+  let searchTerm = '';
+  let selectedEngine = 'google';
+
+  const searchEngines = [
+    { name: 'Google', value: 'google', url: 'https://www.google.com/search?q=' },
+    { name: 'Bing', value: 'bing', url: 'https://www.bing.com/search?q=' },
+    { name: 'DuckDuckGo', value: 'duckduckgo', url: 'https://duckduckgo.com/?q=' },
+    { name: 'Brave', value: 'brave', url: 'https://search.brave.com/search?q=' },
+    { name: 'Yandex', value: 'yandex', url: 'https://yandex.com/search/?text=' },
+    { name: 'Ask.com', value: 'ask', url: 'https://www.ask.com/web?q=' },
+    { name: 'Qwant', value: 'qwant', url: 'https://www.qwant.com/?q=' },
+    { name: 'Yahoo', value: 'yahoo', url: 'https://search.yahoo.com/search?p=' },
+  ];
+
+  const searchTermInput = document.getElementById('searchTerm');
+  const searchEngineSelect = document.getElementById('searchEngine');
+  const searchButton = document.getElementById('searchButton');
+
+  const handleSearchInputChange = (event) => {
+    searchTerm = event.target.value;
+  };
+
+  const handleEngineChange = (event) => {
+    selectedEngine = event.target.value;
+  };
+
+  const handleSearch = () => {
+    const selectedEngineData = searchEngines.find((engine) => engine.value === selectedEngine);
+
+    if (selectedEngineData) {
+      const searchUrl = selectedEngineData.url + encodeURIComponent(searchTerm);
+      window.open(searchUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  searchTermInput.addEventListener('input', handleSearchInputChange);
+  searchEngineSelect.addEventListener('change', handleEngineChange);
+  searchButton.addEventListener('click', handleSearch);
+</script>
